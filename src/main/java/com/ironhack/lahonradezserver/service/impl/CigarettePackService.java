@@ -4,7 +4,7 @@ import com.ironhack.lahonradezserver.DTO.CigarettePackDTO;
 import com.ironhack.lahonradezserver.model.CigarettePack;
 import com.ironhack.lahonradezserver.model.Topic;
 import com.ironhack.lahonradezserver.repository.CigarettePackRepository;
-import com.ironhack.lahonradezserver.repository.SerialRepository;
+import com.ironhack.lahonradezserver.repository.SerieRepository;
 import com.ironhack.lahonradezserver.repository.TopicRepository;
 import com.ironhack.lahonradezserver.service.interfaces.CigarettePackServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class CigarettePackService implements CigarettePackServiceInterface {
     private CigarettePackRepository cigarettePackRepository;
 
     @Autowired
-    private SerialRepository serialRepository;
+    private SerieRepository serieRepository;
 
     @Autowired
     private TopicRepository topicRepository;
@@ -34,6 +34,32 @@ public class CigarettePackService implements CigarettePackServiceInterface {
     }
 
     @Override
+    public List<CigarettePack> getCigarettePacksByTopic(Long topicId) {
+        List<CigarettePack> filteredCigPack = new ArrayList<>();
+        List<CigarettePack> cigarettePacks = cigarettePackRepository.findAll();
+        for (CigarettePack cigPak : cigarettePacks) {
+            for(Topic topic : cigPak.getTopics()) {
+                if(topic.getId() == topicId){
+                    filteredCigPack.add(cigPak);
+                }
+            }
+        }
+        return filteredCigPack;
+    }
+
+    @Override
+    public List<CigarettePack> getCigarettePacksBySerie(String serieName) {
+        List<CigarettePack> filteredCigPack = new ArrayList<>();
+        List<CigarettePack> cigarettePacks = cigarettePackRepository.findAll();
+        for (CigarettePack cigPak : cigarettePacks) {
+            if(cigPak.getSerie().getTitleS().equals(serieName)){
+                filteredCigPack.add(cigPak);
+            }
+        }
+        return filteredCigPack;
+    }
+
+    @Override
     public CigarettePack selectCigarettePackById(Long id) {
         return cigarettePackRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cigarette Pack not found"));
 
@@ -41,11 +67,14 @@ public class CigarettePackService implements CigarettePackServiceInterface {
 
     @Override
     public void saveCigarettePack(CigarettePackDTO cigarettePackDTO) {
+        if(cigarettePackRepository.findByTitleCP(cigarettePackDTO.getTitle()) != null){
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "The Serie with the title" + cigarettePackDTO.getTitle() + "already exist");
+        }
         CigarettePack newCigarettePack = new CigarettePack();
-        newCigarettePack.setTitleCP(cigarettePackDTO.getTittle());
+        newCigarettePack.setTitleCP(cigarettePackDTO.getTitle());
         newCigarettePack.setDescriptionCP(cigarettePackDTO.getDescription());
         newCigarettePack.setLink(cigarettePackDTO.getLink());
-        newCigarettePack.setSerie(serialRepository.findById(cigarettePackDTO.getSerialId()).get());
+        newCigarettePack.setSerie(serieRepository.findByTitleS(cigarettePackDTO.getSerieName()));
 
         List<Topic> topics = new ArrayList<>();
         //topics = topicRepository.findAllById(cigarettePackDTO.getTopics());
@@ -77,6 +106,8 @@ public class CigarettePackService implements CigarettePackServiceInterface {
         CigarettePack cigarettePack1DB = cigarettePackRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cigarette Pack not found"));
         cigarettePackRepository.deleteById(id);
     }
+
+
 
 
 }

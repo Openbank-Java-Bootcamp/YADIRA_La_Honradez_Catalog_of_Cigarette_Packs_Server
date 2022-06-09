@@ -4,7 +4,7 @@ import com.ironhack.lahonradezserver.model.Serie;
 
 import java.util.List;
 
-public interface SerialServiceInterface {
+public interface SerieServiceInterface {
     void saveSerial(Serie serie);
     List<Serie> getAllSeries();
     void updateSerial(Long id, Serie serie);

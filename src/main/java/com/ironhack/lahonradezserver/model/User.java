@@ -16,7 +16,7 @@ public class User {
     @NotNull(message = "The name must not be empty.")
     private String name;
     @NotNull(message = "The username must not be empty.")
-    private String userName;
+    private String username;
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}",
             message = "The password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter.")
     private String password;
@@ -24,9 +24,10 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    public User(String name, String userName, String password) {
+    public User(String name, String username, String password, Role role) {
         this.name = name;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
+        this.role = role;
     }
 }

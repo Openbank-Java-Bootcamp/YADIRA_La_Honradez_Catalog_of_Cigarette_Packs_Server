@@ -9,4 +9,5 @@ public interface ArticleServiceInterface {
     List<Article> getAllArticles();
     void updateArticle(Long id, Article article);
     void deleteArticle(Long id);
+
 }

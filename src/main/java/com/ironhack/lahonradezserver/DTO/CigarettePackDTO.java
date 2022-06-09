@@ -8,9 +8,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CigarettePackDTO {
-    private String tittle;
+    private String title;
     private String description;
     private String link;
     private List<Long> topics;
-    private Long serialId;
+    private String serieName;
 }

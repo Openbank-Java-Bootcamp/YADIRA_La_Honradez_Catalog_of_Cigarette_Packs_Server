@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -19,8 +20,14 @@ public class CigarettePackController {
 
     @GetMapping("/cigarette_packs")
     @ResponseStatus(HttpStatus.OK)
-    public List<CigarettePack> getAllCigarettePack() {
-        return cigarettePackService.getAllCigarettePack();
+    public List<CigarettePack> getACigarettePacks(@RequestParam Optional<Long> topicId, @RequestParam Optional<String> serieName) {
+        if(topicId.isPresent() && !serieName.isPresent()){
+            return cigarettePackService.getCigarettePacksByTopic(topicId.get());
+        } else if (!topicId.isPresent() && serieName.isPresent()){
+            return cigarettePackService.getCigarettePacksBySerie(serieName.get());
+        } else {
+            return cigarettePackService.getAllCigarettePack();
+        }
     }
 
     @GetMapping("/cigarette_packs/{id}")

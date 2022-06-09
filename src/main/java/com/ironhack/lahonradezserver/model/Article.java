@@ -14,7 +14,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull(message = "The tittle of the article must not be empty.")
-    private String tittle;
+    private String title;
     @NotNull(message = "The name of the author must not be empty.")
     private String author;
     private String link;

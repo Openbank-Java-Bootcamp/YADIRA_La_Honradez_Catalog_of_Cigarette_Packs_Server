@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @Slf4j
 public class AuthController {
 
@@ -34,7 +34,7 @@ public class AuthController {
     @ResponseStatus(HttpStatus.OK)
     public String verifyToken(Authentication authentication) {
         String username = (String) authentication.getPrincipal();
-        User userFromDb = userRepository.findByUserName(username);
+        User userFromDb = userRepository.findByUsername(username);
         UserVerifyDTO userVerifyDTO = new UserVerifyDTO(userFromDb.getName());
         Gson gson = new Gson();
         String userDetails = gson.toJson(userVerifyDTO);
