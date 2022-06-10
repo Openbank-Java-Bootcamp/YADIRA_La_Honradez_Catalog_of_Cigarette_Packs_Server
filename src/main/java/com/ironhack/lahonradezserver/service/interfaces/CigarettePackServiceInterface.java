@@ -11,9 +11,9 @@ public interface CigarettePackServiceInterface {
     CigarettePack selectCigarettePackById(Long id);
     void updateCigarettePack(Long id, CigarettePack cigarettePack);
     void deleteCigarettePack(Long id);
-    List<CigarettePack> getAllCigarettePack();
+    List<CigarettePackDTO> getAllCigarettePack();
 
-    List<CigarettePack> getCigarettePacksByTopic(Long topicId);
-    List<CigarettePack> getCigarettePacksBySerie(String serieName);
+    List<CigarettePackDTO> getCigarettePacksByTopic(String topicId);
+    List<CigarettePackDTO> getCigarettePacksBySerie(String serieName);
 
 }

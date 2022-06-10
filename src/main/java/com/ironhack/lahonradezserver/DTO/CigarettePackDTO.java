@@ -11,6 +11,6 @@ public class CigarettePackDTO {
     private String title;
     private String description;
     private String link;
-    private List<Long> topics;
+    private List<String> topics;
     private String serieName;
 }

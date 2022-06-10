@@ -20,10 +20,10 @@ public class CigarettePackController {
 
     @GetMapping("/cigarette_packs")
     @ResponseStatus(HttpStatus.OK)
-    public List<CigarettePack> getACigarettePacks(@RequestParam Optional<Long> topicId, @RequestParam Optional<String> serieName) {
-        if(topicId.isPresent() && !serieName.isPresent()){
-            return cigarettePackService.getCigarettePacksByTopic(topicId.get());
-        } else if (!topicId.isPresent() && serieName.isPresent()){
+    public List<CigarettePackDTO> getACigarettePacks(@RequestParam Optional<String> topic, @RequestParam Optional<String> serieName) {
+        if(topic.isPresent() && !serieName.isPresent()){
+            return cigarettePackService.getCigarettePacksByTopic(topic.get());
+        } else if (!topic.isPresent() && serieName.isPresent()){
             return cigarettePackService.getCigarettePacksBySerie(serieName.get());
         } else {
             return cigarettePackService.getAllCigarettePack();

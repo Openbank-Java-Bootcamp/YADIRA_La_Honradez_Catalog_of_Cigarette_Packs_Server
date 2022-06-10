@@ -2,6 +2,7 @@ package com.ironhack.lahonradezserver.service.impl;
 
 import com.ironhack.lahonradezserver.DTO.CigarettePackDTO;
 import com.ironhack.lahonradezserver.model.CigarettePack;
+import com.ironhack.lahonradezserver.model.Serie;
 import com.ironhack.lahonradezserver.model.Topic;
 import com.ironhack.lahonradezserver.repository.CigarettePackRepository;
 import com.ironhack.lahonradezserver.repository.SerieRepository;
@@ -29,17 +30,41 @@ public class CigarettePackService implements CigarettePackServiceInterface {
     private TopicRepository topicRepository;
 
     @Override
-    public List<CigarettePack> getAllCigarettePack() {
-        return cigarettePackRepository.findAll();
+    public List<CigarettePackDTO> getAllCigarettePack() {
+        List<CigarettePackDTO> cigPackDTOList = new ArrayList<>();
+        List<CigarettePack> allCigPacksDB= cigarettePackRepository.findAll();
+
+        for(CigarettePack cigPackDB : allCigPacksDB) {
+
+            List<String> topicsNames = new ArrayList<>();
+            List<Topic> topics = cigPackDB.getTopics();
+            for(Topic topic : topics){
+                topicsNames.add(topic.getName());
+            }
+
+            String serieName = cigPackDB.getSerie().getTitleS();
+            CigarettePackDTO cigPackDTO = new CigarettePackDTO(
+                    cigPackDB.getTitleCP(),
+                    cigPackDB.getDescriptionCP(),
+                    cigPackDB.getLink(),
+                    topicsNames,
+                    serieName
+            );
+
+            cigPackDTOList.add(cigPackDTO);
+        }
+
+        return cigPackDTOList;
     }
 
     @Override
-    public List<CigarettePack> getCigarettePacksByTopic(Long topicId) {
-        List<CigarettePack> filteredCigPack = new ArrayList<>();
-        List<CigarettePack> cigarettePacks = cigarettePackRepository.findAll();
-        for (CigarettePack cigPak : cigarettePacks) {
-            for(Topic topic : cigPak.getTopics()) {
-                if(topic.getId() == topicId){
+    public List<CigarettePackDTO> getCigarettePacksByTopic(String topic) {
+        List<CigarettePackDTO> filteredCigPack = new ArrayList<>();
+
+        List<CigarettePackDTO> cigarettePacks = getAllCigarettePack();
+        for (CigarettePackDTO cigPak : cigarettePacks) {
+            for(String topicDB : cigPak.getTopics()) {
+                if(topic.equals(topicDB)){
                     filteredCigPack.add(cigPak);
                 }
             }
@@ -48,11 +73,11 @@ public class CigarettePackService implements CigarettePackServiceInterface {
     }
 
     @Override
-    public List<CigarettePack> getCigarettePacksBySerie(String serieName) {
-        List<CigarettePack> filteredCigPack = new ArrayList<>();
-        List<CigarettePack> cigarettePacks = cigarettePackRepository.findAll();
-        for (CigarettePack cigPak : cigarettePacks) {
-            if(cigPak.getSerie().getTitleS().equals(serieName)){
+    public List<CigarettePackDTO> getCigarettePacksBySerie(String serieName) {
+        List<CigarettePackDTO> filteredCigPack = new ArrayList<>();
+        List<CigarettePackDTO> cigarettePacks = getAllCigarettePack();
+        for (CigarettePackDTO cigPak : cigarettePacks) {
+            if(cigPak.getSerieName().equals(serieName)){
                 filteredCigPack.add(cigPak);
             }
         }
@@ -78,8 +103,8 @@ public class CigarettePackService implements CigarettePackServiceInterface {
 
         List<Topic> topics = new ArrayList<>();
         //topics = topicRepository.findAllById(cigarettePackDTO.getTopics());
-        for (Long topicId : cigarettePackDTO.getTopics()) {
-            Topic topic = topicRepository.findById(topicId).get();
+        for (String topicName : cigarettePackDTO.getTopics()) {
+            Topic topic = topicRepository.findByName(topicName);
             topics.add(topic);
         }
 
