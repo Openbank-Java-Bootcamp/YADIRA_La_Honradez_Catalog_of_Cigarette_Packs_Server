@@ -27,8 +27,12 @@ public class ArticleService implements ArticleServiceInterface {
         if(article.getId() != null) {
             Optional<Article> articleOp = articleRepository.findById(article.getId());
             if(articleOp.isPresent()){
-                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Article already exist");
+                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "The article already exist");
             }
+        }
+        Article artDB = articleRepository.findByLink(article.getLink());
+        if(artDB != null) {
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "The article already exist");
         }
         articleRepository.save(article);
     }

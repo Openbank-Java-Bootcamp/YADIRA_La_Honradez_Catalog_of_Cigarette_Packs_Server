@@ -4,4 +4,5 @@ import com.ironhack.lahonradezserver.model.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
+    Article findByLink(String link);
 }
