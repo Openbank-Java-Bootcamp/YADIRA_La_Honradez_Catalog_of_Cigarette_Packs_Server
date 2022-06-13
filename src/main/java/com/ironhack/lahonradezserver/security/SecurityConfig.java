@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.http.HttpMethod.*;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 
@@ -46,6 +47,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/auth/login/**").permitAll();
         http.authorizeRequests().antMatchers("/api/auth/signup").permitAll();
         http.authorizeRequests().antMatchers("/", "/csrf", "/v2/api-docs", "/swagger-resources/configuration/ui", "/configuration/ui", "/swagger-resources", "/swagger-resources/configuration/security", "/configuration/security", "/swagger-ui.html", "/webjars/**").permitAll();
+
+        http.authorizeRequests().antMatchers(GET, "/api/articles").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/articles").hasAnyAuthority("ADMIN_ROLE");
+        http.authorizeRequests().antMatchers(PUT, "/api/articles/**").hasAnyAuthority("ADMIN_ROLE");
+        http.authorizeRequests().antMatchers(DELETE, "/api/articles/**").hasAnyAuthority("ADMIN_ROLE");
+
+        http.authorizeRequests().antMatchers(GET, "/api/cigarette_packs").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/cigarette_packs").hasAnyAuthority("ADMIN_ROLE");
+        http.authorizeRequests().antMatchers(PUT, "/api/cigarette_packs/**").hasAnyAuthority("ADMIN_ROLE");
+        http.authorizeRequests().antMatchers(DELETE, "/api/cigarette_packs/**").hasAnyAuthority("ADMIN_ROLE");
+
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

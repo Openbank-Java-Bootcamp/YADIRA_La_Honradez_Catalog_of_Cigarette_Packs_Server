@@ -38,6 +38,7 @@ public class UserService implements UserServiceInterface, UserDetailsService {
         String username = userSignupDTO.getUsername();
         User userOp = userRepository.findByUsername(username);
         if(userOp != null){
+            log.error("User already exist");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The user already exist");
         }
 

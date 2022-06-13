@@ -23,10 +23,11 @@ public class ArticleService implements ArticleServiceInterface {
     }
 
     @Override
-    public void saveArticle(Article article) {
+    public Article saveArticle(Article article) {
         if(article.getId() != null) {
             Optional<Article> articleOp = articleRepository.findById(article.getId());
             if(articleOp.isPresent()){
+
                 throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "The article already exist");
             }
         }
@@ -34,7 +35,7 @@ public class ArticleService implements ArticleServiceInterface {
         if(artDB != null) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "The article already exist");
         }
-        articleRepository.save(article);
+        return articleRepository.save(article);
     }
 
     @Override

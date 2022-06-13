@@ -2,6 +2,7 @@ package com.ironhack.lahonradezserver.controller;
 
 import com.google.gson.Gson;
 import com.ironhack.lahonradezserver.DTO.UserVerifyDTO;
+import com.ironhack.lahonradezserver.model.Article;
 import com.ironhack.lahonradezserver.model.User;
 import com.ironhack.lahonradezserver.repository.UserRepository;
 import com.ironhack.lahonradezserver.service.impl.UserService;
@@ -12,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -35,7 +37,7 @@ public class AuthController {
     public String verifyToken(Authentication authentication) {
         String username = (String) authentication.getPrincipal();
         User userFromDb = userRepository.findByUsername(username);
-        UserVerifyDTO userVerifyDTO = new UserVerifyDTO(userFromDb.getName());
+        UserVerifyDTO userVerifyDTO = new UserVerifyDTO(userFromDb.getName(), userFromDb.getRole().getName());
         Gson gson = new Gson();
         String userDetails = gson.toJson(userVerifyDTO);
         return userDetails;

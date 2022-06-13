@@ -24,8 +24,8 @@ public class ArticleController {
 
     @PostMapping("/articles")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveArticle(@RequestBody @Valid Article article){
-        articleService.saveArticle(article);
+    public Article saveArticle(@RequestBody @Valid Article article){
+        return articleService.saveArticle(article);
     }
 
     @PutMapping("/articles/{id}")

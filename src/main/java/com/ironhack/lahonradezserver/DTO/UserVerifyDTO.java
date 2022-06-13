@@ -6,5 +6,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserVerifyDTO {
-    private String name;
+    private String user;
+    private String role;
 }
