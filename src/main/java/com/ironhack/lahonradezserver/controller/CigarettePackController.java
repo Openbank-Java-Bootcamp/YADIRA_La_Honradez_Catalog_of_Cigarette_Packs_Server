@@ -32,7 +32,7 @@ public class CigarettePackController {
 
     @GetMapping("/cigarette_packs/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public CigarettePack selectCigarettePackById(@PathVariable Long id){
+    public CigarettePackDTO selectCigarettePackById(@PathVariable Long id){
         return cigarettePackService.selectCigarettePackById(id);
     }
 

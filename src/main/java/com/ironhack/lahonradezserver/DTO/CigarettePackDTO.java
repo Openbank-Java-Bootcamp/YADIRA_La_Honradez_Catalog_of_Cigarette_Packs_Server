@@ -9,6 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CigarettePackDTO {
+    private Long id;
     @NotEmpty(message = "The tittle must not be empty.")
     private String title;
     @NotEmpty(message = "The description must not be empty.")
@@ -17,4 +18,5 @@ public class CigarettePackDTO {
     private String link;
     private List<String> topics;
     private String serieName;
+
 }

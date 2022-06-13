@@ -44,6 +44,7 @@ public class CigarettePackService implements CigarettePackServiceInterface {
 
             String serieName = cigPackDB.getSerie().getTitleS();
             CigarettePackDTO cigPackDTO = new CigarettePackDTO(
+                    cigPackDB.getId(),
                     cigPackDB.getTitleCP(),
                     cigPackDB.getDescriptionCP(),
                     cigPackDB.getLink(),
@@ -85,9 +86,27 @@ public class CigarettePackService implements CigarettePackServiceInterface {
     }
 
     @Override
-    public CigarettePack selectCigarettePackById(Long id) {
-        return cigarettePackRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cigarette Pack not found"));
+    public CigarettePackDTO selectCigarettePackById(Long id) {
 
+        CigarettePack cigPackDB = cigarettePackRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cigarette Pack not found"));
+
+        List<String> topicsNames = new ArrayList<>();
+        List<Topic> topics = cigPackDB.getTopics();
+        for(Topic topic : topics){
+            topicsNames.add(topic.getName());
+        }
+
+        String serieName = cigPackDB.getSerie().getTitleS();
+        CigarettePackDTO cigPackDTO = new CigarettePackDTO(
+                cigPackDB.getId(),
+                cigPackDB.getTitleCP(),
+                cigPackDB.getDescriptionCP(),
+                cigPackDB.getLink(),
+                topicsNames,
+                serieName
+        );
+
+        return cigPackDTO;
     }
 
     @Override
