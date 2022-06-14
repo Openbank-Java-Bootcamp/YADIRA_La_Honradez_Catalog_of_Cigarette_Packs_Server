@@ -14,7 +14,6 @@ public class CigarettePackDTO {
     private String title;
     @NotEmpty(message = "The description must not be empty.")
     private String description;
-    @NotEmpty(message = "The link must not be empty.")
     private String link;
     private List<String> topics;
     private String serieName;

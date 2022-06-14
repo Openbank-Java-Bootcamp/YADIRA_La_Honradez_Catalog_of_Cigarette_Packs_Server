@@ -9,10 +9,9 @@ import java.util.List;
 public interface CigarettePackServiceInterface {
     void saveCigarettePack(CigarettePackDTO cigarettePackDTO);
     CigarettePackDTO selectCigarettePackById(Long id);
-    void updateCigarettePack(Long id, CigarettePack cigarettePack);
+    void updateCigarettePack(Long id, CigarettePackDTO cigarettePackDTO);
     void deleteCigarettePack(Long id);
     List<CigarettePackDTO> getAllCigarettePack();
-
     List<CigarettePackDTO> getCigarettePacksByTopic(String topicId);
     List<CigarettePackDTO> getCigarettePacksBySerie(String serieName);
 

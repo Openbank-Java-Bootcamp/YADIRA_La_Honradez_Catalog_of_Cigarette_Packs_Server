@@ -139,10 +139,24 @@ public class CigarettePackService implements CigarettePackServiceInterface {
     }
 
     @Override
-    public void updateCigarettePack(Long id, CigarettePack cigarettePack) {
-        CigarettePack cigarettePack1DB = cigarettePackRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cigarette Pack not found"));
-        cigarettePack.setId(cigarettePack1DB.getId());
-        cigarettePackRepository.save(cigarettePack);
+    public void updateCigarettePack(Long id, CigarettePackDTO cigarettePackDTO) {
+        CigarettePack cigarettePackDB = cigarettePackRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cigarette Pack not found"));
+        Serie serie = serieRepository.findByTitleS(cigarettePackDTO.getSerieName());
+        List<Topic> topics = new ArrayList<>();
+        for (String topicName : cigarettePackDTO.getTopics()) {
+            Topic topic = topicRepository.findByName(topicName);
+            topics.add(topic);
+        }
+        CigarettePack modifiedCigPack = new CigarettePack(
+                id,
+                cigarettePackDTO.getTitle(),
+                cigarettePackDTO.getDescription(),
+                cigarettePackDTO.getLink(),
+                serie,
+                topics
+        );
+
+        cigarettePackRepository.save(modifiedCigPack);
     }
 
     @Override

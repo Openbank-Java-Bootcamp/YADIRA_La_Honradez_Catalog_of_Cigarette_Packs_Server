@@ -18,7 +18,7 @@ public class CigarettePack {
     @NotNull(message = "The tittle of the cigarette pack must not be empty.")
     private String titleCP;
     private String descriptionCP;
-    @NotNull(message = "The link of the image must not be empty.")
+    @Lob
     private String link;
     @JsonIgnore
     @ManyToOne

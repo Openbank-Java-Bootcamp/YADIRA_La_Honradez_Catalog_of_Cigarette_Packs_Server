@@ -44,8 +44,8 @@ public class CigarettePackController {
 
     @PutMapping("/cigarette_packs/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCigarettePack(@PathVariable Long id, @RequestBody @Valid CigarettePack cigarettePack){
-        cigarettePackService.updateCigarettePack(id, cigarettePack);
+    public void updateCigarettePack(@PathVariable Long id, @RequestBody @Valid CigarettePackDTO cigarettePackDTO){
+        cigarettePackService.updateCigarettePack(id, cigarettePackDTO);
     }
 
     @DeleteMapping("/cigarette_packs/{id}")
