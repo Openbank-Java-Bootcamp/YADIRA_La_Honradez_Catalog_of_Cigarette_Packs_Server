@@ -86,6 +86,18 @@ public class CigarettePackService implements CigarettePackServiceInterface {
     }
 
     @Override
+    public List<CigarettePackDTO> getCigarettePacksByTopicAndFilter(String topic, String serieName) {
+        List<CigarettePackDTO> filteredByTopicAndSerie = new ArrayList<>();
+        List<CigarettePackDTO> filteredByTopic = getCigarettePacksByTopic(topic);
+        for (CigarettePackDTO cigPack : filteredByTopic) {
+            if(cigPack.getSerieName().equals(serieName)){
+                filteredByTopicAndSerie.add(cigPack);
+            }
+        }
+        return filteredByTopicAndSerie;
+    }
+
+    @Override
     public CigarettePackDTO selectCigarettePackById(Long id) {
 
         CigarettePack cigPackDB = cigarettePackRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cigarette Pack not found"));
