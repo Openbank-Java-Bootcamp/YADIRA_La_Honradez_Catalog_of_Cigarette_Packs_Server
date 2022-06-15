@@ -15,7 +15,7 @@ public class CigarettePack {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull(message = "The tittle of the cigarette pack must not be empty.")
+    @NotNull(message = "The title must not be empty")
     private String titleCP;
     private String descriptionCP;
     @Lob
