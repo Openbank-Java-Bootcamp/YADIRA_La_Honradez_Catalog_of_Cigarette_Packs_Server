@@ -9,11 +9,11 @@ The project consists of a demo of a catalog of collector's items (cigarette pack
 For the implementation of the project, guidelines of the agile methodology were followed. For more information you can consult the following trello scheme: https://trello.com/b/69DxjPM4/la-honradez-final-proyect. 
 
 For this demo only the following user stories were taken into account in the backlog:
--> As an unregistered user I can access the main page and consult general information about the La Honradez factory and its cigarette packs.
--> As a registered user I can access the collection of cigarette packs and carry out searches filtered by the name of the series to which they belong and by topic.
--> As a registered user I can access the list of articles published on the internet that delve into the subject.
--> As an administrator I can add, delete and modify cigarette packs.
--> As an administrator I can add, delete and modify articles.
+- As an unregistered user I can access the main page and consult general information about the La Honradez factory and its cigarette packs.
+- As a registered user I can access the collection of cigarette packs and carry out searches filtered by the name of the series to which they belong and by topic.
+- As a registered user I can access the list of articles published on the internet that delve into the subject.
+- As an administrator I can add, delete and modify cigarette packs.
+- As an administrator I can add, delete and modify articles.
 
 ## Technologies
 In the architecture of the project, Spring Boot was used for communication with the front application, deployed in React. Hibernate & JPA were also used for the deployment of models and communication with databases.
