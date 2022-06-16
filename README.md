@@ -34,3 +34,12 @@ In the architecture of the project, Spring Boot was used for communication with 
 ![topic endpoint](https://user-images.githubusercontent.com/100872227/174070408-c1af223b-b374-477b-a282-8c39c4b12adc.jpg)
 
 ![article endpoint](https://user-images.githubusercontent.com/100872227/174070465-97563f66-7696-4bbd-aa09-a7e23525f0a4.jpg)
+
+## Future Work
+Continue with the development of the application, adding more options, endpoints to add series and topics, as well as the possibility of editing them.
+
+Opt for a responsive design that allows a better user experience from devices of various sizes.
+
+## Access to the Front aplication
+https://github.com/Openbank-Java-Bootcamp/YADIRA_La_Honradez_Catalog_of_Cigarette_Packs_Client
+
