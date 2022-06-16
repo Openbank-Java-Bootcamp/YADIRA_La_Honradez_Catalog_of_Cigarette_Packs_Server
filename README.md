@@ -18,12 +18,8 @@ For this demo only the following user stories were taken into account in the bac
 ## Technologies
 In the architecture of the project, Spring Boot was used for communication with the front application, deployed in React. Hibernate & JPA were also used for the deployment of models and communication with databases.
 
-## Use Cases Diagram
-For the development of the application, the following use cases diagram is used:
 ![USE CASES DIAGRAM](https://user-images.githubusercontent.com/100872227/174071243-46973f4b-737b-42a9-b3d9-213e28de1325.png)
 
-## Classes Diagram
-For the structure of the application database, the following class diagram was used:
 ![CLASSES DIAGRAM](https://user-images.githubusercontent.com/100872227/174057669-5382062d-8b39-47ab-9935-bd10ac0d4bef.png)
 
 ## Endpoints and details
