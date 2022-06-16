@@ -20,7 +20,7 @@ In the architecture of the project, Spring Boot was used for communication with 
 
 ## Use Cases Diagram
 For the development of the application, the following use cases diagram is used:
-![USE CASES DIAGRAM](https://user-images.githubusercontent.com/100872227/174054150-bb4c6733-9517-45b1-a5e3-dfb940822657.png)
+![USE CASES DIAGRAM](https://user-images.githubusercontent.com/100872227/174071243-46973f4b-737b-42a9-b3d9-213e28de1325.png)
 
 ## Classes Diagram
 For the structure of the application database, the following class diagram was used:
